@@ -11,10 +11,20 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
       data[i] = s.charAt(i);
     }
   }
+  public MyString(int length){
+    if (length < 0) {
+      throw new StringIndexOutOfBoundsException("invalid parameters");
+}
+    data = new char[length];
+  }
   public MyString subSequence(int start, int end) {
     if (start < 0 || end < 0 || end > data.length || start > end) {throw new StringIndexOutOfBoundsException(arrayerror);}
-    CharSequence input = this.subSequence(start, end);
-    MyString output = new MyString(input);
+    MyString output = new MyString(end - start);
+    int count = 0;
+    for (int index = start; index < end; index += 1) {
+      output.data[count] = data[index];
+      count++;
+    }
     return output;
   }
   public char charAt(int index) {
@@ -37,6 +47,14 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
     if (this.length() == other.length()) {return 0;}
     if (this.length() > other.length()) {return 1;}
     return -1;
+  }
+
+  public String toString() {
+    String output = "";
+    for (int i = 0; i < length(); i += 1) {
+      output += charAt(i);
+    }
+    return output;
   }
 
 }

@@ -1,24 +1,29 @@
 public class MyString implements CharSequence,Comparable<CharSequence>{
   // data is the only private variable;
   private char[] data;
+  // basic message to throw is there is an out of array error.
   String arrayerror = "Will throw Excpetion if start or end are negative, if end is greater than length(), or if start is greater than end";
   public MyString(CharSequence s){
     if (s.length() < 0) {
       throw new StringIndexOutOfBoundsException("invalid parameters");
 }
+// data needs to be equal to the size of the chracters thrown.
     data = new char[s.length()];
+// for loop to convert the chracter into a array
     for (int i = 0; i < s.length(); i += 1) {
       data[i] = s.charAt(i);
     }
   }
+
+// for testing purposes and used once in code; not very important just creates an empty data
   public MyString(int length){
     if (length < 0) {
       throw new StringIndexOutOfBoundsException("invalid parameters");
 }
     data = new char[length];
   }
-  public MyString subSequence(int start, int end) {
-    if (start < 0 || end < 0 || end > data.length || start > end) {throw new StringIndexOutOfBoundsException(arrayerror);}
+  public CharSequence subSequence(int start, int end) {
+    if (start < 0 || end < 0 || end > data.length || start > end) {throw new IndexOutOfBoundsException(arrayerror);}
     MyString output = new MyString(end - start);
     int count = 0;
     for (int index = start; index < end; index += 1) {
